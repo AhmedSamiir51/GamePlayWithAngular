@@ -17,8 +17,8 @@ import { HttpHeadersInterceptor } from './interceptor/http-headers.interceptor';
 import { HttpErrorsInterceptor } from './interceptor/http-errors.interceptor';
 import { DetailsComponent } from './component/details/details.component';
 import { GameTabsComponent } from './component/game-tabs/game-tabs.component';
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -32,6 +32,7 @@ import { GameTabsComponent } from './component/game-tabs/game-tabs.component';
 
     imports: [
     BrowserModule,
+    CommonModule,
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
@@ -41,6 +42,7 @@ import { GameTabsComponent } from './component/game-tabs/game-tabs.component';
     HttpClientModule,
     FormsModule,
     GaugeModule.forRoot(),
+    NgxPaginationModule
 
   ],
   providers: [

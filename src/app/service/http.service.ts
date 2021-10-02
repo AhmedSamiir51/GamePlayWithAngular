@@ -12,10 +12,7 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-  getGameList(
-    ordering: string,
-    search?: string
-  ): Observable<APIResponse<Game>> {
+  getGameList(ordering: string,search?: string): Observable<APIResponse<Game>> {
     let params = new HttpParams().set('ordering', ordering);
 
     if (search) {
@@ -36,11 +33,7 @@ export class HttpService {
       `${env.BASE_URL}/games/${id}/screenshots`
     );
 
-    return forkJoin({
-      gameInfoRequest,
-      gameScreenshotsRequest,
-      gameTrailersRequest,
-    }).pipe(
+    return forkJoin({ gameInfoRequest,gameScreenshotsRequest,gameTrailersRequest,}).pipe(
       map((resp: any) => {
         return {
           ...resp['gameInfoRequest'],

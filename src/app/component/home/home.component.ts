@@ -16,18 +16,16 @@ export class HomeComponent implements OnInit {
   private routeSub: any;
   private gameSub: any;
 
+  TotalLength:any;
+  page:any = 1;
+
+
   constructor( private httpService: HttpService,
     private router: Router,
     private activatedRoute: ActivatedRoute,private title:Title) { }
 
   ngOnInit(): void {
-    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['game-search']) {
-        this.searchGames('metacrit', params['game-search']);
-      } else {
-        this.searchGames('metacrit');
-      }
-    });
+    this. fetchPosts();
     this.title.setTitle("Game Play" )
 
   }
@@ -45,6 +43,32 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['details', id]);
   }
 
+
+
+
+
+
+  fetchPosts(): void {
+
+    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+      if (params['game-search']) {
+        this.searchGames('metacrit', params['game-search']);
+      } else {
+        this.searchGames('metacrit');
+      }
+    });
+
+  }
+
+  onTableDataChange(event:any){
+    this.page = event;
+    this.fetchPosts();
+  }
+
+
+
+
+
   ngOnDestroy(): void {
     if (this.gameSub) {
       this.gameSub.unsubscribe();
@@ -54,6 +78,10 @@ export class HomeComponent implements OnInit {
       this.routeSub.unsubscribe();
     }
   }
+
+
+
+
 
 
 }
